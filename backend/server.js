@@ -1,11 +1,11 @@
 import express from 'express'
-
+import connectDB from './db.js'
+import productsRouter from './routers/products.router.js'
 const app = express()
+app.use(express.json())
+app.use('/api/products', productsRouter)
 
-app.get('/', (req, res)=>{
-  res.json({"BLE": "RED"})
-})
-
-app.listen(8080, "localhost", ()=>{
-  console.log("listening on port 8080")
+app.listen(process.env.PORT, "localhost", ()=>{
+  console.log(`listening on port ${process.env.PORT}`)
+  connectDB()
 })
