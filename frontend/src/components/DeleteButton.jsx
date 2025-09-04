@@ -16,7 +16,7 @@ export default function DeleteButton({ setProducts, products, id }){
   const handleShow = () => setShow(true);
   return(
     <div>
-      <Button variant="danger" onClick={handleShow} >Delete</Button>
+      <Button variant="danger" onClick={handleShow} ><i className="bi bi-trash"></i></Button>
       <DeletionModal show={show} setShow={setShow} acceptedDeletion={acceptedDeletion} setAcceptedDeletion={setAcceptedDeletion}/>
     </div>
   )

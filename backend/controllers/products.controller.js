@@ -1,3 +1,4 @@
+import mongoose from 'mongoose'
 import Product from '../models/products.model.js'
 import httpStatus from '../utils/httpStatus.js'
 const getProducts = async (_, res)=>{
@@ -51,7 +52,13 @@ const editProduct = async (req, res) =>{
 
   try {
     const product = await Product.findByIdAndUpdate(id, req.body, {new: true})
-    res.status(200).json({status: httpStatus.SUCCESS, data: product})
+    const responseProduct = {
+      _id: product._id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+    }
+    res.status(200).json({status: httpStatus.SUCCESS, data: responseProduct})
   } catch (error) {
     res.status(500).json({status: httpStatus.FAIL, data: null, message: error.message})
   }
