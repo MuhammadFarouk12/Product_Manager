@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
 import { ProductsContext } from '../App.jsx'
 import axios from 'axios'
-export default function ModalShow() {
+export default function ModalShow({setShowError, setErrorMessage}) {
   const [show, setShow] = useState(false);
   const { products, setProducts } = useContext(ProductsContext);
   const handleClose = () => setShow(false);
@@ -23,8 +23,14 @@ export default function ModalShow() {
 
   function handleAddClick(e){
     handleClose(e)
-    axios.post('http://localhost:8080/api/products/add', {name, image, price}).then(response=>{
-    setProducts([...products, response.data.data])
+    axios.post('http://localhost:8080/api/products/add/', {name, image, price})
+    .then(response=>{
+      setProducts([...products, response.data.data])
+      setShowError(false)
+    })
+    .catch(error=>{
+        setErrorMessage({message: error.message, status: error.status})
+        setShowError(true)
     })
   }
 

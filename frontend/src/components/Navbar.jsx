@@ -2,7 +2,7 @@ import ModalShow from './ModalShow';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import {Nav} from 'react-bootstrap';
 
-export default function Navbar() {
+export default function Navbar({setShowError, setErrorMessage}) {
   return (
     <Nav
       className="justify-content-between"
@@ -14,7 +14,7 @@ export default function Navbar() {
       </Nav.Item>
  
       <Nav.Item>
-        <ModalShow/>
+        <ModalShow setShowError={setShowError} setErrorMessage={setErrorMessage}/>
       </Nav.Item>
     </Nav>
   );

@@ -33,7 +33,12 @@ export default function UpdateModal(props) {
     const targetProductIndex = products.findIndex(product=>product._id == productId)
     const updatedArray = products.with(targetProductIndex, updatedProductFromResponse)
     setProdcuts(updatedArray)
+    props.setShowError(false)
     })
+    .catch(error=>{
+        props.setShowError(true)
+        props.setErrorMessage({message: error.message, status: error.status})
+      })
 
   }
 

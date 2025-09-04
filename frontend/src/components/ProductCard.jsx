@@ -18,8 +18,20 @@ export default function ProductCard(props){
                 </ListGroup.Item>
             </ListGroup>
             <div className="d-flex justify-content-between">
-              <DeleteButton setProducts={props.setProducts} products={props.products} id={props.id}/>
-              <UpdateButton setProducts={props.setProducts} products={props.products} data={props.data}/>
+              <DeleteButton
+                setProducts={props.setProducts}
+                products={props.products}
+                id={props.id}
+                setShowError={props.setShowError}
+                setErrorMessage={props.setErrorMessage}
+              />
+              <UpdateButton
+                setProducts={props.setProducts}
+                products={props.products}
+                data={props.data}
+                setShowError={props.setShowError}
+                setErrorMessage={props.setErrorMessage}
+              />
             </div>
           </Card.Body>
         </Card>

@@ -3,13 +3,18 @@ import axios from 'axios'
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import { Button } from 'react-bootstrap';
 import DeletionModal from './DeletionModal.jsx'
-export default function DeleteButton({ setProducts, products, id }){
+export default function DeleteButton({setProducts, products, id, setShowError, setErrorMessage }){
   const [show, setShow] = useState(false);
   const [acceptedDeletion, setAcceptedDeletion] = useState(false);
-  // console.log(products)
   useEffect(()=>{
     if(acceptedDeletion){
       axios.delete(`http://localhost:8080/api/products/delete/${id}`)
+      .then(data=>{
+          setShowError(false)
+        }).catch(error=>{
+          setShowError(true)
+          setErrorMessage({message: error.message, status: error.status})
+        })
       setProducts(products.filter(product=>product._id!=id))
     }
   }, [acceptedDeletion])
