@@ -14,11 +14,18 @@ const addProduct = async (req, res)=>{
     return res.status(400).json({status: httpStatus.FAIL})
   }
 
-  const newProduct = new Product(req.body)
-  console.log(newProduct)
   try {
-    await newProduct.save()
-    res.status(201).json({status: httpStatus.SUCCESS, data: {product: newProduct}})
+    const returnedProduct = new Product(req.body)
+    await returnedProduct.save()
+
+    const newProduct = {
+      name: returnedProduct.name,
+      price: returnedProduct.price,
+      image: returnedProduct.image,
+      _id: returnedProduct._id
+    }
+
+    res.status(201).json({status: httpStatus.SUCCESS, data: newProduct})
   } catch (error) {
     res.status(400).json({status: httpStatus.ERROR, message: error.message, data: null})
   }

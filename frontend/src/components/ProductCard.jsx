@@ -18,7 +18,7 @@ export default function ProductCard(props){
                   Price: {props.data.price}
                 </ListGroup.Item>
             </ListGroup>
-            <DeleteButton setProducts={props.setProducts} products={props.products} id={props.id}/>
+              <DeleteButton setProducts={props.setProducts} products={props.products} id={props.id}/>
           </Card.Body>
         </Card>
        </Col>
